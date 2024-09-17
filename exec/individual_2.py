@@ -15,15 +15,21 @@
 class Account:
 
     def __init__(self, surname, number, percent, cash):
+        'Метод инициализации необходимых атрибутов класса'
+
         self.surname = str(surname)
         self.number = str(number)
         self.percent = float(percent)
         self.cash = float(cash)
 
     def change_owner(self, newOwner):
+        'Метод смены владельца счёта'
+
         self.surname = newOwner
 
     def display(self):
+        'Метод вывода информации о созданном счёте'
+
         print(f"{self.surname} | {self.number} | {self.percent} |",
               f"{self.cash}")
 
@@ -31,18 +37,24 @@ class Account:
 class AccountManagement:
 
     def withdraw_money(self, money, account: Account):
+        'Метод для снятия денежных средств со счёта аккаунта'
+
         if account.cash >= int(money):
             account.cash -= int(money)
         else:
             print("На счету недостаточная сумма для выполнения операции")
 
     def put_money(self, money, account: Account):
+        'Метод пополнения денежных средств на аккаунте'
+
         account.cash += int(money)
 
 
 class InterestHandler:
 
     def __init__(self, account: Account):
+        'Метод инициализации'
+
         self.percent = account.percent
 
     def accrue_percent(self, account: Account):
@@ -52,12 +64,18 @@ class InterestHandler:
 class Converter:
 
     def transfer_dollar(self, account: Account):
+        'Метод перевода валюты на счёте аккаунта в доллары'
+
         print(f"Перевод в доллары: ${round(account.cash / 90, 2)}")
 
     def transfer_euro(self, account: Account):
+        'Метод перевода валюты на счёте аккаунта в евро'
+
         print(f"Перевод в евро: €{round(account.cash / 100, 2)}")
 
     def transfer_text(self, account: Account):
+        'Метод перевода валюты в текстовый формат'
+
         text_number = round(account.cash)
         result = ""
         if text_number > 10000:
@@ -115,6 +133,8 @@ class Converter:
 
 
 if __name__ == "__main__":
+    'Метод инициализации'
+
     account = Account("Иванов", "333-123", 20, 10000)
     account.display()
     account.change_owner("Петров")
